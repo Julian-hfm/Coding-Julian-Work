@@ -6,13 +6,14 @@ Dateipfad = input("Bitte gebe einen Dateipfad eines Bildes ein: ")
 try:
     image = Image.open(Dateipfad)
 except IOError:
-    print("Dies ist kein Bild. Bitte fügen Sie ein Bild ein")
-    
+    print("Dies ist kein Bild. Fügen Sie einen korrekten Dateipfad für ein Bild ein")
+
 my_file = Path(Dateipfad)
 if my_file.is_file() == True:
     obj = ImageToAscii()
     obj.image_path(Dateipfad)
     obj.plot()
-else: 
+else:
     my_file.is_file() == False
     print("Datei ist nicht vorhanden: Bitte eine anderen Pfad einfügen")
+    
