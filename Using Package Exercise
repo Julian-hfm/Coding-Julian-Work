@@ -1,3 +1,4 @@
+
 from image_to_ascii import ImageToAscii
 from pathlib import Path
 from PIL import Image
