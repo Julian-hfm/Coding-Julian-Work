@@ -40,3 +40,20 @@ else:
     obj = ImageToAscii()
     obj.image_path(Dateipfad)
     obj.plot()
+
+
+Code Explanation:
+1. get the tools (modules) that you will need later. These include ImageToAscii, Path (to check file paths), Image (to open images) and sys (to terminate the program if an error occurs).
+
+2. you ask the user to enter a file path (location of the image file on the computer) and save this path in the variable filepath.
+
+3. check whether the file exists at the specified path.
+If the file does not exist, you display an error message and exit the program.
+
+4. try to open the file as an image.
+If this does not work (because it is not an image), you display an error message and exit the program.
+
+5. if everything went well (the file exists and is an image), the rest of the code is executed:
+You create a new ImageToAscii object.
+You pass the image path to this object.
+You convert the image into ASCII characters and display it.
