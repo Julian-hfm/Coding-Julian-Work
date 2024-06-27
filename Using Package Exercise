@@ -41,7 +41,6 @@ else:
     obj.image_path(Dateipfad)
     obj.plot()
 
-
 Code Explanation:
 1. get the tools (modules) that you will need later. These include ImageToAscii, Path (to check file paths), Image (to open images) and sys (to terminate the program if an error occurs).
 
