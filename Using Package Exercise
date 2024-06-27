@@ -2,7 +2,9 @@ from image_to_ascii import ImageToAscii
 from pathlib import Path
 Dateipfad = input("Bitte gebe einen Dateipfad eines Bildes ein: ")
 my_file = Path(Dateipfad)
-if my_file.isfile() == True:
+if my_file.is_file() == True:
     obj = ImageToAscii()
     obj.image_path(Dateipfad)
     obj.plot()
+if my_file.is_file() == False:
+    print("Datei ist nicht vorhanden: Bitte eine anderen Pfad einfügen")
