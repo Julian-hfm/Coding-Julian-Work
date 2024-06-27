@@ -1,3 +1,4 @@
+
 First, I checked if I met all the requirements to solve the task and install packages. To do this, I first verified if the connection between Visual Studio Code and Python worked. I tested this by running the command py --version. I then saw the following version displayed: Python 3.12.3. This means the connection is established. Next, I checked with the command py -m pip --version if PIP was already available. The result was: pip 24.0.
 
 Afterwards, I created a virtual environment in Visual Studio Code so that this program and its packages do not affect my other projects. For this, I ran the following command: python -m venv venv and then activated the virtual environment with this command: .\venv\Scripts\activate. This gives me the virtual environment "venv".
