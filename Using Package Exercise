@@ -1,13 +1,14 @@
 from image_to_ascii import ImageToAscii
 from pathlib import Path
 from PIL import Image
+import sys 
 Dateipfad = input("Bitte gebe einen Dateipfad eines Bildes ein: ")
 
 try:
     image = Image.open(Dateipfad)
 except IOError:
     print("Dies ist kein Bild. Fügen Sie einen korrekten Dateipfad für ein Bild ein")
-
+    sys.exit() 
 my_file = Path(Dateipfad)
 if my_file.is_file() == True:
     obj = ImageToAscii()
@@ -16,4 +17,3 @@ if my_file.is_file() == True:
 else:
     my_file.is_file() == False
     print("Datei ist nicht vorhanden: Bitte eine anderen Pfad einfügen")
-    
