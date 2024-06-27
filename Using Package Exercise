@@ -1,3 +1,20 @@
+First, I checked if I met all the requirements to solve the task and install packages. To do this, I first verified if the connection between Visual Studio Code and Python worked. I tested this by running the command py --version. I then saw the following version displayed: Python 3.12.3. This means the connection is established. Next, I checked with the command py -m pip --version if PIP was already available. The result was: pip 24.0.
+
+Afterwards, I created a virtual environment in Visual Studio Code so that this program and its packages do not affect my other projects. For this, I ran the following command: python -m venv venv and then activated the virtual environment with this command: .\venv\Scripts\activate. This gives me the virtual environment "venv".
+
+Next, I tried to install the specified module using the command: python3 -m pip install image-to-ascii-pyaoponto in the terminal. Since this resulted in the following error message: "Run the command without arguments to install it via the Microsoft Store, or disable this shortcut," I tried a different module, namely the module python -m pip install image-to-ascii-pyaoponto. This was successful:
+
+PS C:\Users\hofma\OneDrive\Desktop\Coding> python -m pip install image-to-ascii-pyaoponto
+>>
+Requirement already satisfied: image-to-ascii-pyaoponto in c:\users\hofma\onedrive\desktop\coding\venv\lib\site-packages (0.3)
+Requirement already satisfied: Pillow in c:\users\hofma\onedrive\desktop\coding\venv\lib\site-packages (from image-to-ascii-pyaoponto) (10.3.0)
+
+[notice] A new release of pip is available: 24.0 -> 24.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
+After a brief search, I noticed that the venv was not properly activated yet. I then activated it with the following command: venv/Scripts/activate.
+
+Then I gradually worked on the code:
 
 from image_to_ascii import ImageToAscii
 from pathlib import Path
@@ -18,5 +35,3 @@ if my_file.is_file() == True:
 else:
     my_file.is_file() == False
     print("Datei ist nicht vorhanden: Bitte eine anderen Pfad einfügen")
-
-
