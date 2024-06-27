@@ -1,0 +1,21 @@
+Ich habe als erstes geprüft, ob ich alle Anforderungen erfülle, um die Aufgabe zu lösen und Pakete zu installieren. 
+Dazu habe ich zunächst geprüft, ob die Verknüpfung von Visual Studio Code und Python funktioniert. Hierzu habe ich den Befehl py --version getestet. 
+Und habe dann meine entsprechende Version angezeigt bekommen,Python 3.12.3. 
+Bedeutet die Verknüpfung steht. Danach habe ich mit dem Befehl py -m pip --version geprüft, ob bereits PIP verfügbar sind.Und bekomme dies als Ergebnis: pip 24.0
+Anschließend habe ich in Visual Studio Code eine Virtuelle Umgebung erzeugt, damit dieses Programm bzw. diese Pakete meine anderen Projekte nicht beeinflusst.
+Hierzu habe ich dann, folgenden Befehl ausgeführt. python -m venv venv und anschließend die Virtuelle Umgebung aktiviert mit diesem Befehl: .\venv\Scripts\activate
+Hier erhalte ich dann den virtuellen Bereich "venv" virtualEnvironment
+Anschließend, habe ich versucht das vorgebene Modul: "python3 -m pip install image-to-ascii-pyaoponto" im Terminal zu installieren.
+Da dies leider in folgende Fehlermeldung resultiert ist, "Führen Sie die Verknüpfung ohne Argumente aus, um sie über den Microsoft Store zu installieren, oder deaktivieren Sie diese Verknüpfung unter", 
+habe ich ein anderes Modul, nämlich das Modul "python -m pip install image-to-ascii-pyaoponto"
+ Dies war erfolgreich: 
+
+PS C:\Users\hofma\OneDrive\Desktop\Coding> python -m pip install image-to-ascii-pyaoponto
+>>
+Requirement already satisfied: image-to-ascii-pyaoponto in c:\users\hofma\onedrive\desktop\coding\venv\lib\site-packages (0.3)
+Requirement already satisfied: Pillow in c:\users\hofma\onedrive\desktop\coding\venv\lib\site-packages (from image-to-ascii-pyaoponto) (10.3.0)
+
+[notice] A new release of pip is available: 24.0 -> 24.1.1
+[notice] To update, run: python.exe -m pip install --upgrade pip
+
+
