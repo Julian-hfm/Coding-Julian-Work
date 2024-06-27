@@ -19,3 +19,7 @@ Requirement already satisfied: Pillow in c:\users\hofma\onedrive\desktop\coding\
 [notice] To update, run: python.exe -m pip install --upgrade pip
 
 
+Nach kurzer Recherche ist mir aufgefallen, das die venv noch nicht richtig aktiv war. Diese habe ich dann mit dem Folgenden Befehl aktiviert:
+venv/Scripts/activate
+
+Dann habe ich nach und nach versucht mir den Code zu erarbeiten.
