@@ -1,4 +1,4 @@
-Here is the explanaition for the Video:
+Here is the explanation for the Video:
 
 main.py File:
 from flask import Flask, render_template, request
