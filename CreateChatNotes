@@ -1,6 +1,8 @@
-Additional Notes for the CreateChat Homework:
+Additional Notes / Problems that appeared for the CreateChat Homework:
 
 created_at = db.Column(db.Datetime(), default=datetime.utcnow)
+
+
 
 https://www.loom.com/share/b935a8b4e53f4f31bac0c191b51189c7?sid=d66bd4b6-f28c-47a5-8f67-cd8f10760640
 
