@@ -1,1 +1,51 @@
+created_at = db.Column(db.Datetime(), default=datetime.utcnow)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Alle Tabs inclusive: den ganzen Code Zeilen, zeigen, dass die created at outdatet ist. Und man mit datime.now gearbeitet hat, dies aber noch nicht funktioniert hat. Und Diese Spalte nicht in der Tabelle ergänzt wird.
+
+Server Starten in neuem Terminal: python main.py
+Dann auf /Julian gehen
+Dann mit verschiedenen Namen anmelden und Nachrichten schicken
+
+Dann zeigen, dass die Nachrichten in der Datenbank datei gespeichert werden
