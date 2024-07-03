@@ -5,3 +5,30 @@ https://www.loom.com/share/8aaa5b449ed64ca39c45802685a52ff0?sid=f0764194-d222-44
 
 https://www.loom.com/share/b935a8b4e53f4f31bac0c191b51189c7?sid=57f16c17-0e47-4b5c-a9e7-f91c742b276f
 https://www.loom.com/share/b935a8b4e53f4f31bac0c191b51189c7?sid=d66bd4b6-f28c-47a5-8f67-cd8f10760640
+
+DATABASE:
+
+The execution of the database did not work with the command from the video, so I used a different command sequence here:
+
+from main import app, db
+app.app_context().push()
+db.create_all()
+exit()
+
+
+WEBSITE:
+
+Use the Python main.py command to start the web application. For the link, you still have to insert one or its name, as we have defined it here:
+app.route("/<name>", methods=['Get', 'POST'])
+def start_page(name):
+
+Then you can freely create and add chat messages, these will then be loaded (if the database is working properly) into the database and saved. Own messages are displayed on the left side, this is defined here:
+
+{%if name == message.user%} justify-content-end {% else %}
+
+and messages from someone else are displayed on the right side.
+
+This is defined here:
+justify-content-start {% endif %} mt-4">
+
+Translated with DeepL.com (free version)
