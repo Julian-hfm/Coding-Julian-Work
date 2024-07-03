@@ -43,4 +43,10 @@ def start_page(name):
     messages = Message.query.order_by(Message.id).all()
     return render_template('index.html', messages=messages, name=name)
 
-Route and View Function: Defines a route for the URL /<name>. If a POST request is received, a new message is created and added to the database. Then, all messages are retrieved and the index.html template is rendered with the messages and the user's name.
+Route and View Function: Defines a route for the URL /<name>. If a POST request is received, 
+a new message is created and added to the database. Then, all messages are retrieved and the index.html 
+template is rendered with the messages and the user's name.
+
+
+App Launch: Starts the Flask application in debug mode if the script is executed directly.Debug Mode: In debug mode, the server provides 
+detailed error messages and automatically reloads the application when changes are detected in the code, making development and debugging easier.
