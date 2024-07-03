@@ -1,9 +1,7 @@
+Additional Notes for the CreateChat Homework:
+
 created_at = db.Column(db.Datetime(), default=datetime.utcnow)
 
-
-https://www.loom.com/share/8aaa5b449ed64ca39c45802685a52ff0?sid=f0764194-d222-44eb-b189-6a5007196571
-
-https://www.loom.com/share/b935a8b4e53f4f31bac0c191b51189c7?sid=57f16c17-0e47-4b5c-a9e7-f91c742b276f
 https://www.loom.com/share/b935a8b4e53f4f31bac0c191b51189c7?sid=d66bd4b6-f28c-47a5-8f67-cd8f10760640
 
 DATABASE:
@@ -31,4 +29,4 @@ and messages from someone else are displayed on the right side.
 This is defined here:
 justify-content-start {% endif %} mt-4">
 
-Translated with DeepL.com (free version)
+
