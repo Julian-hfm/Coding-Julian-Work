@@ -1,6 +1,8 @@
 Additional Notes / Problems that appeared for the CreateChat Homework:
 
 created_at = db.Column(db.Datetime(), default=datetime.utcnow)
+Here I had the problem that the class created.at datetime.utcnow was obsolete, so I had to change it to datetime.now,
+but unfortunately I could no longer load this into my database.
 
 
 
