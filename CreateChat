@@ -1,112 +1,30 @@
-main.py
+Here is the explanaition for the Video:
+
+main.py File:
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
-from datetime import datetime  
+from datetime import datetime 
+
+Imports: Imports necessary modules and classes to create a Flask web application, SQLAlchemy for database integration, and datetime for timestamps.
+
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
+App Initialization and Configuration: Creates a Flask application, configures SQLAlchemy to use a SQLite database, and disables unnecessary modification tracking.
+
+
+
 class Message(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     user = db.Column(db.String(200), nullable=True)
     content = db.Column(db.String(500), nullable=True)
-    
+    created_at = db.Column(db.DateTime(), default=datetime.now)
 
-@app.route("/<name>", methods=['Get', 'POST'])
-def start_page(name):   
-    if request.method == 'POST':
-        new_message = Message(
-            user = name,
-            content = request.form['content']
-        )
-        db.session.add(new_message)
-        db.session.commit
-    messages = Message.query.order_by(Message.id).all()
-    return render_template('index.html', messages=messages, name=name)
-
-if __name__ == "__main__":
-    app.run(debug=True)
-
-index.html
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
-        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
-    
-    <style>
-        .my-form{
-            position: fixed;
-            bottom: 24px;
-            right: 80px;
-            left: 80px;
-            width: calc(100% - 160px);
-        }
-
-        .msg-id{
-            font-size: 12px;
-            position: absolute;
-            right: 4px;
-            bottom: 4px;
-            color: rgba(rgb(255, 1, 1)
-        
-        }
-    </style>
-
-
-</head>
-
-<body>
-
-    <nav class="navbar bg-light">
-        <div class="container-fluid">
-            <a class="navbar-brand" href="#">Chat Messenger</a>
-        </div>
-    </nav>
-
-    <div class="container">
-        {% for message in messages %}
-        <div class="d-flex {%if name == message.user%} justify-content-end {% else %} justify-content-start {% endif %} mt-4">
-            <div class="card">
-                <div class="card-body">
-                    <b>{{ message .user }}: </b>
-                    {{ message.content }}
-                
-                <span class="msg-id" >{{ message.id }}</span>
-                
-                
-            </div>
-            </div>
-
-        </div>
-        {% endfor %}
-
-
-
-
-        <form class="input-group mb-3 my-form" action="" method="POST">
-            <input type="text" name="content" class="form-control" placeholder="Bitte geben Sie hier Ihre Nachricht ein">
-            <button class="btn btn-outline-secondary" type="submit" >Senden</button>
-        </form>
-
-        
-
-
-            
-
-
-    </div>
-
-</body>
-
-</html>
+Database Model: Defines a Message model with fields id, user, content, and created_at for storing messages in the database.
+Hier hatte ich das Problem, dass die Klasse created.at datetime.utcnow veraltet war, und ich so auf datetime.now ändern musste,
+diese habe ich aber leider nicht mehr in meine Datenbank geladen bekommen.
 
