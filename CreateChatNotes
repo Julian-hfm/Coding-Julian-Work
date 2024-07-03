@@ -1,6 +1,7 @@
 created_at = db.Column(db.Datetime(), default=datetime.utcnow)
 
 
+https://www.loom.com/share/8aaa5b449ed64ca39c45802685a52ff0?sid=f0764194-d222-44eb-b189-6a5007196571
 
 
 
