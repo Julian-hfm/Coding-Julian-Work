@@ -25,6 +25,22 @@ class Message(db.Model):
     created_at = db.Column(db.DateTime(), default=datetime.now)
 
 Database Model: Defines a Message model with fields id, user, content, and created_at for storing messages in the database.
-Hier hatte ich das Problem, dass die Klasse created.at datetime.utcnow veraltet war, und ich so auf datetime.now ändern musste,
-diese habe ich aber leider nicht mehr in meine Datenbank geladen bekommen.
+Here I had the problem that the class created.at datetime.utcnow was obsolete, so I had to change it to datetime.now,
+but unfortunately I could no longer load this into my database.
 
+
+
+
+@app.route("/<name>", methods=['GET', 'POST'])
+def start_page(name):   
+    if request.method == 'POST':
+        new_message = Message(
+            user=name,
+            content=request.form['content']
+        )
+        db.session.add(new_message)
+        db.session.commit()
+    messages = Message.query.order_by(Message.id).all()
+    return render_template('index.html', messages=messages, name=name)
+
+Route and View Function: Defines a route for the URL /<name>. If a POST request is received, a new message is created and added to the database. Then, all messages are retrieved and the index.html template is rendered with the messages and the user's name.
