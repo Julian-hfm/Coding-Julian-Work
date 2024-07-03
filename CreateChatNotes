@@ -13,20 +13,3 @@ app.app_context().push()
 db.create_all()
 exit()
 
-
-WEBSITE:
-
-Use the Python main.py command to start the web application. For the link, you still have to insert one or its name, as we have defined it here:
-app.route("/<name>", methods=['Get', 'POST'])
-def start_page(name):
-
-Then you can freely create and add chat messages, these will then be loaded (if the database is working properly) into the database and saved. Own messages are displayed on the left side, this is defined here:
-
-{%if name == message.user%} justify-content-end {% else %}
-
-and messages from someone else are displayed on the right side.
-
-This is defined here:
-justify-content-start {% endif %} mt-4">
-
-
