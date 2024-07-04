@@ -1,6 +1,7 @@
 Here is the explanation for the Video:
 
 main.py File:
+
 from flask import Flask, render_template, request
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime 
