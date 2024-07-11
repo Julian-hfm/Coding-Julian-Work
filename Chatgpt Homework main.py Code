@@ -1,0 +1,81 @@
+from flask import Flask, render_template, request, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+from openai import OpenAI
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///db.db'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
+
+# OpenAI API-Schlüssel einrichten
+client = OpenAI(
+    api_key='#KEY for OpenAI Access'
+)
+
+def chatgpt(prompt):
+    response = client.chat.completions.create(
+        model="gpt-4o",  # Ändere auf das zugängliches Modell
+        messages=[
+            {"role": "system", "content": "Du kannst mich hier unterstützen"},
+            {"role": "user", "content": prompt}
+        ],
+    )
+    return str(response.choices[0].message.content)
+
+class Message(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user = db.Column(db.String(200), nullable=True)
+    content = db.Column(db.String(500), nullable=True)
+    response = db.Column(db.String(500), nullable=True)  # Neue Spalte für ChatGPT-Antwort
+    created_at = db.Column(db.DateTime(), default=datetime.now)
+    reports = db.relationship('Report', backref='message', lazy=True)
+
+class Report(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    reporter = db.Column(db.String(500), nullable=True)
+    reported_user = db.Column(db.String(500), nullable=True)
+    message_id = db.Column(db.Integer, db.ForeignKey('message.id'), nullable=False)
+    created_at = db.Column(db.DateTime(), default=datetime.now)
+
+@app.route("/", methods=['GET'])
+def index():
+    # Weiterleitung zur Standard-Namensroute
+    return redirect(url_for('start_page', name='DefaultUser'))
+
+@app.route("/<name>", methods=['GET', 'POST'])
+def start_page(name):
+    if request.method == 'POST':
+        content = request.form.get('content')
+        if content:
+            # Sende die Nachricht an ChatGPT und erhalte die Antwort
+            gpt_response = chatgpt(content)
+
+            # Speichere die Benutzernachricht und die ChatGPT-Antwort in der Datenbank
+            new_message = Message(
+                user=name,
+                content=content,
+                response=gpt_response
+            )
+            db.session.add(new_message)
+            db.session.commit()
+    
+    messages = Message.query.order_by(Message.id).all()
+    return render_template('index.html', messages=messages, name=name)
+
+@app.route("/report", methods=['POST'])
+def report_message():
+    message_id = request.form['message_id']
+    reported_user = request.form['reported_user']
+    reporter = request.form['reporter']
+    new_report = Report(
+        message_id=message_id,
+        reported_user=reported_user,
+        reporter=reporter
+    )
+    db.session.add(new_report)
+    db.session.commit()
+    return redirect(request.referrer)
+
+if __name__ == "__main__":
+    app.run(debug=True)
