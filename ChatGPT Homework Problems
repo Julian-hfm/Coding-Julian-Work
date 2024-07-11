@@ -1,0 +1,5 @@
+What is Now Possible on the Website
+Send Messages: Users can enter and send messages.
+Receive ChatGPT Responses: Each sent message is forwarded to ChatGPT, and the response is displayed below the original message.
+Report Messages: Users can report messages using the "Report" button.
+View Responses in the Database: All messages and corresponding ChatGPT responses are stored in the database and can be viewed there.
