@@ -79,3 +79,23 @@ def report_message():
 
 if __name__ == "__main__":
     app.run(debug=True)
+
+
+
+Imports and App Configuration:
+Configures Flask, SQLAlchemy, and imports necessary libraries.
+
+OpenAI API Configuration:
+Initializes the OpenAI client with the API key.
+
+ChatGPT Function:
+Sends the user message to ChatGPT and retrieves the response.
+
+Database Models:
+Defines the Message and Report models.
+
+Routes and Views:
+
+Redirects to the default user route.
+Handles message sending, ChatGPT response retrieval, and database storage.
+Allows users to report messages.
