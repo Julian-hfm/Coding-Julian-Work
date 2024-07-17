@@ -1,0 +1,294 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"> <!-- Setzt den Zeichensatz auf UTF-8 -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"> <!-- Setzt die Viewport-Einstellungen -->
+    <title>Play Against AI</title> <!-- Setzt den Titel der Webseite -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Importiert die Schriftart Roboto -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> <!-- Importiert Bootstrap CSS -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Importiert Bootstrap Icons -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"> 
+    </script> <!-- Importiert Bootstrap JS -->
+
+    <style>
+        body, html {
+            height: 100%; /* Setzt die Höhe auf 100% */
+            margin: 0; /* Entfernt den Außenabstand */
+            display: flex; /* Verwendet Flexbox-Layout */
+            flex-direction: column; /* Setzt die Flex-Richtung auf Spalte */
+            align-items: center; /* Zentriert die Elemente horizontal */
+            justify-content: flex-start; /* Richtet die Elemente oben aus */
+            font-family: 'Roboto', sans-serif; /* Setzt die Schriftart auf Roboto */
+            color: #5a9bd4; /* Setzt die Textfarbe auf Hellblau */
+        }
+
+        .container {
+            display: flex; /* Verwendet Flexbox-Layout */
+            flex-direction: column; /* Setzt die Flex-Richtung auf Spalte */
+            align-items: center; /* Zentriert die Elemente horizontal */
+            width: 80%; /* Setzt die Breite auf 80% */
+            max-width: 800px; /* Setzt die maximale Breite auf 800 Pixel */
+            margin-top: 20px; /* Setzt den oberen Rand auf 20 Pixel */
+        }
+
+        h1, h2 {
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+        .score {
+            font-size: 36px; /* Setzt die Schriftgröße auf 36 Pixel */
+            font-weight: bold; /* Setzt die Schrift auf fett */
+            color: #333; /* Setzt die Schriftfarbe auf dunkelgrau */
+            margin: 20px 0; /* Setzt die äußeren Abstände auf 20 Pixel oben und unten */
+            display: flex; /* Verwendet Flexbox-Layout */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+        }
+
+        .upload-form {
+            display: flex; /* Verwendet Flexbox-Layout */
+            flex-direction: column; /* Setzt die Flex-Richtung auf Spalte */
+            align-items: center; /* Zentriert die Elemente horizontal */
+            width: 100%; /* Setzt die Breite auf 100% */
+        }
+
+        .upload-form div {
+            margin: 10px 0; /* Setzt die äußeren Abstände auf 10 Pixel oben und unten */
+            width: 100%; /* Setzt die Breite auf 100% */
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+        }
+
+        .upload-form input[type="file"] {
+            display: none; /* Versteckt das Datei-Upload-Eingabefeld */
+        }
+
+        .custom-file-upload-wrapper {
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            border: 2px solid #5a9bd4; /* Setzt eine 2 Pixel breite, hellblaue Umrandung */
+            border-radius: 12px; /* Macht die Ecken der Umrandung abgerundet */
+            overflow: hidden; /* Versteckt den Überlauf */
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            width: 750px; /* Setzt die Breite auf 750 Pixel */
+            height: 60px; /* Setzt die Höhe auf 60 Pixel */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand bei Hover */
+            font-size: 24px; /* Setzt die Schriftgröße auf 24 Pixel */
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+        .custom-file-upload {
+            padding: 10px 20px; /* Setzt die Innenabstände auf 10 Pixel oben und unten, sowie 20 Pixel links und rechts */
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            color: #5a9bd4; /* Setzt die Schriftfarbe auf Hellblau */
+            flex-grow: 1; /* Lässt das Element mitwachsen */
+            text-align: center; /* Zentriert den Text horizontal */
+            user-select: none; /* Verhindert das Markieren des Textes */
+            cursor: default; /* Setzt den Mauszeiger auf Standard */
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+        }
+
+        .icon-button {
+            padding: 10px; /* Setzt die Innenabstände auf 10 Pixel */
+            border: 2px solid white; /* Setzt eine 2 Pixel breite, weiße Umrandung */
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            color: #5a9bd4; /* Setzt die Schriftfarbe auf Hellblau */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand bei Hover */
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+            transition: border-color 0.3s, background-color 0.3s; /* Fügt eine Übergangsanimation von 0,3 Sekunden hinzu */
+        }
+
+        .icon-button:hover {
+            border-color: #5a9bd4; /* Ändert die Umrandungsfarbe auf Hellblau bei Hover */
+            background-color: #e0f7ff; /* Ändert die Hintergrundfarbe auf Hellblau bei Hover */
+        }
+
+        .play-button {
+            padding: 15px 30px; /* Setzt die Innenabstände auf 15 Pixel oben und unten, sowie 30 Pixel links und rechts */
+            border: 2px solid #5a9bd4; /* Setzt eine 2 Pixel breite, hellblaue Umrandung */
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            color: #5a9bd4; /* Setzt die Schriftfarbe auf Hellblau */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand bei Hover */
+            transition: background-color 0.3s, color 0.3s; /* Fügt eine Übergangsanimation von 0,3 Sekunden hinzu */
+            border-radius: 12px; /* Macht die Ecken der Umrandung abgerundet */
+            margin-left: 10px; /* Setzt den linken Rand auf 10 Pixel */
+            text-align: center; /* Zentriert den Text horizontal */
+            font-size: 24px; /* Setzt die Schriftgröße auf 24 Pixel */
+            height: 60px; /* Setzt die Höhe auf 60 Pixel */
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+        }
+
+        .play-button:hover {
+            background-color: #5a9bd4; /* Ändert die Hintergrundfarbe auf Hellblau bei Hover */
+            color: white; /* Ändert die Schriftfarbe auf Weiß bei Hover */
+        }
+
+        .upload-icon {
+            width: 24px; /* Setzt die Breite auf 24 Pixel */
+            height: 24px; /* Setzt die Höhe auf 24 Pixel */
+        }
+
+        .file-name {
+            margin-left: 10px; /* Setzt den linken Rand auf 10 Pixel */
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+            color: #5a9bd4; /* Setzt die Schriftfarbe auf Hellblau */
+        }
+
+        .error-message {
+            color: red; /* Setzt die Schriftfarbe auf Rot */
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+            margin-top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+        }
+
+        .success-message {
+            color: green; /* Setzt die Schriftfarbe auf Grün */
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+            margin-top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+        }
+        
+        .file-upload-container {
+            display: flex; /* Verwendet Flexbox-Layout */
+            align-items: center; /* Zentriert die Elemente vertikal */
+            justify-content: center; /* Zentriert die Elemente horizontal */
+            flex-direction: column; /* Setzt die Flex-Richtung auf Spalte */
+        }
+
+        .refresh-icon {
+            width: 40px; /* Setzt die Breite auf 40 Pixel */
+            height: 40px; /* Setzt die Höhe auf 40 Pixel */
+            color: #5a9bd4; /* Setzt die Farbe auf Hellblau */
+            margin-bottom: 10px; /* Setzt den unteren Rand auf 10 Pixel */
+        }
+
+        .home-button {
+            width: 40px; /* Setzt die Breite auf 40 Pixel */
+            height: 40px; /* Setzt die Höhe auf 40 Pixel */
+            color: #5a9bd4; /* Setzt die Farbe auf Hellblau */
+            position: fixed; /* Setzt die Position auf fixiert */
+            top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+            left: 10px; /* Setzt den linken Rand auf 10 Pixel */
+            border: none; /* Entfernt die Umrandung */
+            background-color: transparent; /* Setzt die Hintergrundfarbe auf transparent */
+        }
+
+        .footer-text {
+            text-align: center; /* Zentriert den Text horizontal */
+            margin-top: auto; /* Setzt den oberen Rand auf automatisch */
+            margin-bottom: 20px; /* Setzt den unteren Rand auf 20 Pixel */
+            width: 100%; /* Setzt die Breite auf 100% */
+        }
+
+        .footer-text p {
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+        }
+
+        .contact-link {
+            font-weight: bold; /* Setzt die Schrift auf fett */
+            color: inherit; /* Erbt die Schriftfarbe des Eltern-Elements */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand bei Hover */
+            text-decoration: none; /* Entfernt die Unterstreichung */
+            padding: 5px 10px; /* Setzt die Innenabstände auf 5 Pixel oben und unten, sowie 10 Pixel links und rechts */
+            border: 2px solid #5a9bd4; /* Setzt eine 2 Pixel breite, hellblaue Umrandung */
+            border-radius: 12px; /* Macht die Ecken der Umrandung abgerundet */
+            transition: background-color 0.3s, color 0.3s; /* Fügt eine Übergangsanimation von 0,3 Sekunden hinzu */
+            display: inline-block; /* Setzt die Anzeige auf inline-block */
+            margin-top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+        }
+
+        .contact-link:hover {
+            background-color: #5a9bd4; /* Ändert die Hintergrundfarbe auf Hellblau bei Hover */
+            color: white; /* Ändert die Schriftfarbe auf Weiß bei Hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+
+        <a href="/" class="home-button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-house-fill" viewBox="0 0 16 16">
+                <path d="M8.707 1.5a1 1 0 0 0-1.414 0L.646 8.146a.5.5 0 0 0 .708.708L8 2.207l6.646 6.647a.5.5 0 0 0 .708-.708L13 5.793V2.5a.5.5 0 0 0-.5-.5h-1a.5.5 0 0 0-.5.5v1.293z"/> <!-- Definiert den Pfad für das Haus-Icon -->
+                <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293z"/> <!-- Definiert den Pfad für das Haus-Icon -->
+            </svg>
+        </a>
+
+        <h1>Play Against AI</h1> <!-- Überschrift für die Seite -->
+        <div class="score">{{ score.userone }} {{ score.scoreone }} : {{ score.scoretwo }} Computer</div> <!-- Zeigt den Spielstand an -->
+        <h4>Result: {{ result }}</h4> <!-- Zeigt das Spielergebnis an -->
+        <form id="upload-form" action="" method="post" enctype="multipart/form-data" class="upload-form">
+            <div class="file-upload-container">
+                <a href="" class="refresh-icon"> <!-- Definiert das Refresh-Icon -->
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-repeat" viewBox="0 0 16 16">
+                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/> <!-- Definiert den Pfad für das Refresh-Icon -->
+                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/> <!-- Definiert den Pfad für das Refresh-Icon -->
+                    </svg>
+                </a>
+                <div class="custom-file-upload-wrapper">
+                    <span class="custom-file-upload">Choose file to upload</span> <!-- Textfeld für die Dateiauswahl -->
+                    <input type="file" id="file" name="file" onchange="displayFileName()"> <!-- Verstecktes Datei-Upload-Feld -->
+                    <button type="button" class="icon-button" onclick="document.getElementById('file').click()"> <!-- Button zum Auslösen des Datei-Uploads -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-upload upload-icon" viewBox="0 0 16 16">
+                          <path d="M.5 9.9a.5.5 0 0 1 .5.5v2.5a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-2.5a.5.5 0 0 1 1 0v2.5a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2v-2.5a.5.5 0 0 1 .5-.5"/> <!-- Definiert den Pfad für das Upload-Icon -->
+                          <path d="M7.646 1.146a.5.5 0 0 1 .708 0l3 3a.5.5 0 0 1-.708.708L8.5 2.707V11.5a.5.5 0 0 1-1 0V2.707L5.354 4.854a.5.5 0 1 1-.708-.708z"/> <!-- Definiert den Pfad für das Upload-Icon -->
+                        </svg>
+                    </button>
+                </div>
+                <button type="submit" class="play-button">
+                    Play <!-- Button zum Absenden des Formulars -->
+                </button>
+            </div>
+            <div id="file-name" class="file-name">No file chosen</div> <!-- Feld zur Anzeige des ausgewählten Dateinamens -->
+            <div id="error-message" class="error-message"></div> <!-- Feld zur Anzeige von Fehlermeldungen -->
+            <div id="success-message" class="success-message"></div> <!-- Feld zur Anzeige von Erfolgsmeldungen -->
+        </form>
+    </div>
+    
+    <div class="footer-text">
+        <form method="post" action="/support_user">
+            <p>Any question or other concerns? Contact our team <button type="submit" name="action" value="support" class="contact-link">here</button></p> <!-- Formular zum Senden von Supportanfragen -->
+        </form>
+    </div>
+    
+    <script>
+        function displayFileName() {
+            const input = document.getElementById('file'); // Holt das Datei-Upload-Feld
+            const fileName = document.getElementById('file-name'); // Holt das Feld zur Anzeige des Dateinamens
+            fileName.textContent = input.files[0].name; // Setzt den Dateinamen im Anzeigefeld
+        }
+
+        document.getElementById('upload-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Verhindert das Standardverhalten des Formulars
+            const form = event.target; // Holt das Formular
+            const formData = new FormData(form); // Holt die Formulardaten
+
+            fetch(form.action, {
+                method: form.method, // Setzt die Methode des Formulars
+                body: formData // Setzt die Formulardaten als Anfragekörper
+            })
+            .then(response => response.json()) // Wandelt die Antwort in JSON um
+            .then(data => {
+                const errorMessage = document.getElementById('error-message'); // Holt das Feld für Fehlermeldungen
+                const successMessage = document.getElementById('success-message'); // Holt das Feld für Erfolgsmeldungen
+                if (data.error) {
+                    errorMessage.textContent = data.error; // Setzt den Fehlertext im Fehlerfeld
+                    successMessage.textContent = ''; // Löscht den Erfolgstext im Erfolgsfeld
+                } else {
+                    errorMessage.textContent = ''; // Löscht den Fehlertext im Fehlerfeld
+                    successMessage.textContent = 'File successfully uploaded'; // Setzt den Erfolgstext im Erfolgsfeld
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error); // Gibt Fehler in der Konsole aus
+            });
+        });
+    </script>
+</body>
+</html>
