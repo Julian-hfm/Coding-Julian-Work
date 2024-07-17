@@ -1,0 +1,269 @@
+<!DOCTYPE html> <!-- Definiert das Dokument als HTML5 -->
+<html lang="en"> <!-- Setzt die Sprache des Dokuments auf Englisch -->
+
+<head>
+    <meta charset="UTF-8"> <!-- Legt die Zeichencodierung des Dokuments auf UTF-8 fest -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Sorgt dafür, dass die Webseite auf allen Geräten gut aussieht, insbesondere auf mobilen Geräten -->
+    <title>Rock Paper Scissors</title> <!-- Setzt den Titel des Dokuments, der im Browser-Tab angezeigt wird -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"> <!-- Integriert die Roboto-Schriftart von Google Fonts -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> <!-- Integriert das Bootstrap-CSS-Framework von einem CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.5.0/font/bootstrap-icons.min.css" rel="stylesheet"> <!-- Integriert Bootstrap Icons von einem CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous">
+    </script> <!-- Integriert das Bootstrap-JavaScript-Framework von einem CDN -->
+
+    <style> <!-- Öffnet einen Block zum Definieren von benutzerdefiniertem CSS -->
+        body, html { 
+            height: 100%; /* Setzt die Höhe von body und html auf 100%, um die gesamte Höhe des Ansichtsfensters abzudecken */
+            margin: 0; /* Entfernt die Standardmargen von body und html */
+            display: flex; /* Aktiviert Flexbox für body und html */
+            flex-direction: column; /* Ordnet die Kinder von body und html vertikal an */
+            align-items: center; /* Zentriert die Kinder von body und html horizontal */
+            font-family: 'Roboto', sans-serif; /* Setzt die Schriftart für das Dokument auf Roboto */
+            color: #5a9bd4; /* Setzt die Textfarbe auf einen Blauton */
+            background-color: #f8f9fa; /* Setzt die Hintergrundfarbe auf ein sehr helles Grau */
+        }
+
+        h1 { 
+            text-align: center; /* Zentriert den Text horizontal */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+            margin-top: 0; /* Entfernt den oberen Rand */
+        }
+
+        h3 { 
+            text-align: center; /* Zentriert den Text horizontal */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+            margin-top: 5px; /* Setzt den oberen Rand auf 5 Pixel */
+        }
+
+        .main-container { 
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+            margin-top: 5px; /* Setzt den oberen Rand auf 5 Pixel */
+            justify-content: center; /* Zentriert die Kinder des Elements horizontal */
+        }
+
+        .container { 
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            flex-direction: column; /* Ordnet die Kinder des Elements vertikal an */
+            align-items: center; /* Zentriert die Kinder des Elements horizontal */
+            margin: 5px; /* Setzt den äußeren Abstand auf 5 Pixel */
+        }
+
+        .input-container { 
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            flex-direction: column; /* Ordnet die Kinder des Elements vertikal an */
+            align-items: center; /* Zentriert die Kinder des Elements horizontal */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+            margin-bottom: 10px; /* Setzt den unteren Rand auf 10 Pixel */
+        }
+
+        .input-container input, .button-container button {
+            padding: 15px 20px; /* Setzt die Innenabstände auf 15 Pixel oben und unten, sowie 20 Pixel links und rechts */
+            border: 2px solid #5a9bd4; /* Setzt die Rahmenfarbe auf den Blauton und die Rahmendicke auf 2 Pixel */
+            border-radius: 12px; /* Macht die Ecken des Rahmens abgerundet */
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+            width: 400px; /* Setzt die Breite auf 400 Pixel */
+            margin-top: 5px; /* Setzt den oberen Rand auf 5 Pixel */
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+        .button-container { 
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            flex-direction: column; /* Ordnet die Kinder des Elements vertikal an */
+            align-items: center; /* Zentriert die Kinder des Elements horizontal */
+        }
+
+        .button-container button {
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            color: #5a9bd4; /* Setzt die Textfarbe auf den Blauton */
+            font-weight: bold; /* Macht die Schrift fett */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand, wenn über das Element gefahren wird */
+            transition: background-color 0.3s, color 0.3s; /* Fügt eine Übergangsanimation von 0,3 Sekunden hinzu, wenn sich die Hintergrundfarbe oder die Textfarbe ändert */
+        }
+
+        .button-container button:hover {
+            background-color: #5a9bd4; /* Ändert die Hintergrundfarbe auf den Blauton, wenn das Element gehovt wird */
+            color: white; /* Ändert die Textfarbe auf Weiß, wenn das Element gehovt wird */
+        }
+
+        .scoreboard {
+            border: 2px solid #5a9bd4; /* Setzt die Rahmenfarbe auf den Blauton und die Rahmendicke auf 2 Pixel */
+            padding: 20px; /* Setzt die Innenabstände auf 20 Pixel */
+            width: 400px; /* Setzt die Breite auf 400 Pixel */
+            height: 150px; /* Setzt die Höhe auf 150 Pixel */
+            border-radius: 12px; /* Macht die Ecken des Rahmens abgerundet */
+            margin-top: 5px; /* Setzt den oberen Rand auf 5 Pixel */
+        }
+
+        .scoreboard-title {
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            align-items: center; /* Zentriert die Kinder des Elements vertikal */
+            justify-content: center; /* Zentriert die Kinder des Elements horizontal */
+            margin-top: 5px; /* Setzt den oberen Rand auf 5 Pixel */
+            margin-bottom: -10px; /* Setzt den unteren Rand auf -10 Pixel, um den negativen Abstand zu erzwingen */
+            font-size: 24px; /* Setzt die Schriftgröße auf 24 Pixel */
+            font-weight: bold; /* Macht die Schrift fett */
+            text-align: center; /* Zentriert den Text horizontal */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+        }
+
+        .scoreboard h5 {
+            margin-top: -10px; /* Setzt den oberen Rand auf -10 Pixel */
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+            font-weight: bold; /* Macht die Schrift fett */
+            text-align: center; /* Zentriert den Text horizontal */
+        }
+
+        .refresh-container {
+            display: flex; /* Aktiviert Flexbox für dieses Element */
+            justify-content: flex-end; /* Richtet die Kinder des Elements am rechten Rand aus */
+            align-items: center; /* Zentriert die Kinder des Elements vertikal */
+            width: 400px; /* Setzt die Breite auf 400 Pixel */
+            margin-top: -30px; /* Setzt den oberen Rand auf -30 Pixel */
+        }
+
+        .refresh-icon {
+            width: 40px; /* Setzt die Breite auf 40 Pixel */
+            height: 40px; /* Setzt die Höhe auf 40 Pixel */
+            color: #5a9bd4; /* Setzt die Farbe auf den Blauton */
+        }
+
+        .description-container {
+            margin-left: -80px; /* Setzt den linken Rand auf -80 Pixel */
+            max-width: 1200px; /* Setzt die maximale Breite auf 1200 Pixel */
+            color: black; /* Setzt die Textfarbe auf Schwarz */
+            margin-top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+        }
+
+        .description-container h4 {
+            font-size: 20px; /* Setzt die Schriftgröße auf 20 Pixel */
+            margin-bottom: 8px; /* Setzt den unteren Rand auf 8 Pixel */
+            text-align: left; /* Richtet den Text linksbündig aus */
+        }
+
+        .description-container p, .description-container ol, .description-container ul {
+            font-size: 16px; /* Setzt die Schriftgröße auf 16 Pixel */
+            line-height: 1.5; /* Setzt den Zeilenabstand auf das 1,5-fache der Schriftgröße */
+            margin: 8px 0; /* Setzt den oberen und unteren Rand auf 8 Pixel */
+            text-align: left; /* Richtet den Text linksbündig aus */
+        }
+
+        .description-container li {
+            margin-bottom: 4px; /* Setzt den unteren Rand auf 4 Pixel */
+        }
+
+        .footer-text {
+            text-align: center; /* Zentriert den Text horizontal */
+            margin-top: auto; /* Setzt den oberen Rand auf Auto, um das Element nach unten zu schieben */
+            margin-bottom: 10px; /* Setzt den unteren Rand auf 10 Pixel */
+            width: 100%; /* Setzt die Breite auf 100%, sodass das Element die gesamte verfügbare Breite einnimmt */
+        }
+
+        .footer-text p {
+            font-size: 18px; /* Setzt die Schriftgröße auf 18 Pixel */
+        }
+
+        .contact-link {
+            font-weight: bold; /* Macht die Schrift fett */
+            color: #5a9bd4; /* Setzt die Textfarbe auf den Blauton */
+            cursor: pointer; /* Ändert den Mauszeiger auf eine Hand, wenn über das Element gefahren wird */
+            text-decoration: none; /* Entfernt die Standard-Textdekoration (Unterstreichung) */
+            padding: 5px 10px; /* Setzt die Innenabstände auf 5 Pixel oben und unten, sowie 10 Pixel links und rechts */
+            border: 2px solid #5a9bd4; /* Setzt die Rahmenfarbe auf den Blauton und die Rahmendicke auf 2 Pixel */
+            border-radius: 12px; /* Macht die Ecken des Rahmens abgerundet */
+            transition: background-color 0.3s, color 0.3s; /* Fügt eine Übergangsanimation von 0,3 Sekunden hinzu, wenn sich die Hintergrundfarbe oder die Textfarbe ändert */
+            display: inline-block; /* Macht das Element zu einem Inline-Block, sodass es neben anderen Elementen angezeigt werden kann, aber auch Block-Eigenschaften hat */
+            margin-top: 10px; /* Setzt den oberen Rand auf 10 Pixel */
+            background-color: white; /* Setzt die Hintergrundfarbe auf Weiß */
+            font-size: 14px; /* Setzt die Schriftgröße auf 14 Pixel */
+            padding: 5px 10px; /* Setzt die Innenabstände auf 5 Pixel oben und unten, sowie 10 Pixel links und rechts */
+        }
+
+        .contact-link:hover {
+            background-color: #5a9bd4; /* Ändert die Hintergrundfarbe auf den Blauton, wenn das Element gehovt wird */
+            color: white; /* Ändert die Textfarbe auf Weiß, wenn das Element gehovt wird */
+        }
+    </style> <!-- Schließt den Stilblock -->
+    <script>
+        function contactTeam() {
+            window.location.href = '/support_user'; /* Wechselt zur URL "/support_user" */
+        }
+    </script> <!-- Schließt den Skriptblock -->
+</head> <!-- Schließt den Kopf des Dokuments -->
+
+<body>
+    <h1>Rock Paper Scissors - play with your friends!</h1> <!-- Überschrift der Seite -->
+    <h3>with Image recognition</h3> <!-- Unterüberschrift der Seite -->
+
+    <div class="main-container">
+        <div class="container">
+            <div class="input-container">
+                <form method="post" action="/play"> <!-- Formularelement, das Daten per POST an "/play" sendet -->
+                    <input type="text" id="username" name="username" placeholder="Enter User Name" onfocus="this.placeholder = ''" onblur="this.placeholder = 'Enter User Name'"> <!-- Textfeld zur Eingabe des Benutzernamens -->
+                    <div class="button-container">
+                        <button type="submit" name="action" value="player">Play Against other Users</button> <!-- Schaltfläche zum Spielen gegen andere Benutzer -->
+                        <button type="submit" name="action" value="com">Play Against AI</button> <!-- Schaltfläche zum Spielen gegen die KI -->
+                    </div>
+                </form>
+            </div>
+            <div class="scoreboard-title">
+                Leaderboard <!-- Titel des Scoreboards -->
+            </div>
+            <div class="refresh-container">
+                <a href="/">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="40" height="40" fill="currentColor" class="bi bi-arrow-repeat refresh-icon" viewBox="0 0 16 16">
+                        <path d="M11.534 7h3.932a.25.25 0 0 1 .192.41l-1.966 2.36a.25.25 0 0 1-.384 0l-1.966-2.36a.25.25 0 0 1 .192-.41m-11 2h3.932a.25.25 0 0 0 .192-.41L2.692 6.23a.25.25 0 0 0-.384 0L.342 8.59A.25.25 0 0 0 .534 9"/> <!-- Erstellt das Refresh-Symbol -->
+                        <path fill-rule="evenodd" d="M8 3c-1.552 0-2.94.707-3.857 1.818a.5.5 0 1 1-.771-.636A6.002 6.002 0 0 1 13.917 7H12.9A5 5 0 0 0 8 3M3.1 9a5.002 5.002 0 0 0 8.757 2.182.5.5 0 1 1 .771.636A6.002 6.002 0 0 1 2.083 9z"/> <!-- Weitere Pfade für das Refresh-Symbol -->
+                    </svg>
+                </a> <!-- Link zum Neuladen der Seite -->
+            </div>
+            <div class="scoreboard" style="margin-top: 5px;">
+                <h5>Most games won:</h5> <!-- Überschrift für die meisten gewonnenen Spiele -->
+                {% for entry in won %}
+                <p>{{ entry.user }}: {{ entry.won }} Wins</p> <!-- Zeigt Benutzer und Anzahl der gewonnenen Spiele an -->
+                {% endfor %}
+            </div>
+            
+            <div class="scoreboard" style="margin-top: 5px;">
+                <h5>Most games lost:</h5> <!-- Überschrift für die meisten verlorenen Spiele -->
+                {% for entry in lost %}
+                <p>{{ entry.user }}: {{ entry.lost }} Defeats</p> <!-- Zeigt Benutzer und Anzahl der verlorenen Spiele an -->
+                {% endfor %}
+            </div>
+        </div>
+        <div class="description-container">
+            <h4>Welcome to Rock Paper Scissors Online!</h4> <!-- Überschrift für die Begrüßungsnachricht -->
+            <p>Hello and welcome! Ready for some quick fun? Let's play Rock Paper Scissors!</p> <!-- Begrüßungstext -->
+            <h4>How to Play:</h4> <!-- Überschrift für die Spielanleitung -->
+            <ol>
+                <li>Choose Your Move: Select Rock, Paper, or Scissors.
+                    <ul>
+                        <li>Rock crushes Scissors.</li> <!-- Beschreibung der Spielregel -->
+                        <li>Scissors cuts Paper.</li> <!-- Beschreibung der Spielregel -->
+                        <li>Paper covers Rock.</li> <!-- Beschreibung der Spielregel -->
+                    </ul>
+                </li>
+                <li>Upload Your Hand Gesture: Take a photo of your hand showing Rock, Paper, or Scissors and upload it.</li> <!-- Anleitung zum Hochladen eines Bildes -->
+                <li>The Computer Plays Too: Our system will make a choice.</li> <!-- Hinweis, dass das System auch eine Wahl trifft -->
+                <li>See Who Wins!</li> <!-- Aufforderung, zu sehen, wer gewinnt -->
+            </ol>
+            <h4>Why You'll Love It:</h4> <!-- Überschrift für die Vorteile des Spiels -->
+            <ul>
+                <li>Easy and Fast: Simple rules and quick rounds.</li> <!-- Vorteil des Spiels -->
+                <li>Interactive: Upload images of your hand gestures for more fun.</li> <!-- Vorteil des Spiels -->
+            </ul>
+            <h4>Ready to Play?</h4> <!-- Aufforderung zum Spielen -->
+            <p>Click your choice below or upload your hand gesture image. Good luck and have fun!</p> <!-- Weitere Aufforderung zum Spielen -->
+        </div>
+    </div>
+
+    <div class="footer-text">
+        <form method="post" action="/support_user"> <!-- Formularelement, das Daten per POST an "/support_user" sendet -->
+            <p>Any question or other concerns? Contact our team <button type="submit" name="action" value="support" class="contact-link">here</button></p> <!-- Aufforderung, das Support-Team zu kontaktieren -->
+        </form>
+    </div>
+</body> <!-- Schließt den Body des Dokuments -->
+
+</html> <!-- Schließt das HTML-Dokument -->
