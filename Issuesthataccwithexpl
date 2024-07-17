@@ -1,1 +1,83 @@
 
+3 Fehler die aufgetreten sind:
+
+1.	Problem mit der Zentrierung des "Support Chat"-Texts in der Navbar:
+•	Fehler: Der "Support Chat"-Text war nicht zentriert in der Navigationsleiste, wodurch die Benutzeroberfläche unausgewogen aussah.
+•	Lösung: Um dieses Problem zu beheben, hast du die CSS-Eigenschaft flex-grow: 1; verwendet, um sicherzustellen, dass der Text den verfügbaren Platz ausfüllt, und text-align: center; hinzugefügt, um den Text innerhalb des verfügbaren Platzes zu zentrieren.
+
+.navbar-text {
+•	    font-size: 24px;
+•	    font-weight: bold;
+•	    margin-right: auto;
+•	    margin-left: 20px;
+•	    flex-grow: 1;
+•	    text-align: center;
+•	}
+
+
+2.	 Problem mit dem Home-Button, der nicht richtig angezeigt wurde:
+•	Fehler: Der Home-Button wurde aufgrund von Konflikten mit anderen CSS-Stilen nicht korrekt angezeigt.
+•	Lösung: Du hast den Home-Button explizit mit width: 40px;, height: 40px;, color: #5a9bd4;, border: none; und background-color: transparent; gestylt, um sicherzustellen, dass er immer korrekt angezeigt wird.
+
+
+
+.home-button {
+•	    width: 40px;
+•	    height: 40px;
+•	    color: #5a9bd4;
+•	    border: none;
+•	    background-color: transparent;
+•	}
+3.	Problem mit der Positionierung des Home-Buttons:
+•	Fehler: Der Home-Button war nicht an der gewünschten Position auf der Seite, wodurch die Navigation erschwert wurde.
+•	Lösung: Um dies zu beheben, hast du position: fixed;, top: 10px; und left: 10px; verwendet, um den Home-Button fest oben links auf der Seite zu positionieren.
+.home-button {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+}
+
+4.	Fehler: Das "Choose file to upload"-Eingabefeld und der Upload-Button waren nicht richtig ausgerichtet oder hatten unterschiedliche Höhen, was das Layout störte.
+Lösung: Du hast die CSS-Stile so angepasst, dass das Eingabefeld und der Button die gleiche Höhe haben und korrekt ausgerichtet sind.
+
+.custom-file-upload-wrapper {
+    display: flex;
+    align-items: center;
+    border: 2px solid #5a9bd4;
+    border-radius: 12px;
+    overflow: hidden;
+    background-color: white;
+    width: 750px;  /* Größere Breite für den Kasten */
+    height: 60px;  /* Höhere Höhe für den Kasten */
+    cursor: pointer;
+    font-size: 24px;
+    text-align: center;
+}
+
+.play-button {
+    padding: 15px 30px;
+    border: 2px solid #5a9bd4;
+    background-color: white;
+    color: #5a9bd4;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    border-radius: 12px;
+    margin-left: 10px;
+    text-align: center;
+    font-size: 24px;
+    height: 60px;  /* Höhe angepasst */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+5.	Fehler 2: Problem mit der Darstellung der Spielstände
+Fehler: Die Spielstände auf der "Play Against Another User"-Seite wurden nicht richtig angezeigt oder aktualisiert.
+Lösung: Du hast sicher gestellt, dass die Spielstände korrekt im HTML-Template eingebunden und angezeigt werden.
+
+<div class="score">{{ score.userone }} {{ score.scoreone }} : {{ score.scoretwo }} {{ score.usertwo }}</div>
+<h4>Result: {{ result }}</h4>
+
+
+
